@@ -1,12 +1,15 @@
 /* jshint node: true */
 'use strict';
 
-const BasePlugin = require('ember-cli-deploy-plugin');
-const md5Hash = require('./lib/utils/md5-hash');
-const path = require('path');
-const fs = require('fs-promise');
-const mkdirp = require('mkdirp');
+const fs             = require('fs');
+const path           = require('path');
+const RSVP           = require('rsvp');
+const mkdirp         = require('mkdirp');
 const S3UploadClient = require('./lib/s3');
+const rename         = RSVP.denodeify(fs.rename);
+const BasePlugin     = require('ember-cli-deploy-plugin');
+const md5Hash        = require('./lib/utils/md5-hash');
+
 
 module.exports = {
   name: 'ember-cli-deploy-fastboot-s3-downloader-manifest',
@@ -27,7 +30,7 @@ module.exports = {
           let newFilePath = path.join(outputPath, newFileName);
 
           mkdirp.sync(outputPath);
-          return fs.rename(archivePath, newFilePath).then(() => {
+          return rename(archivePath, newFilePath).then(() => {
             let manifestFile =
 `{
   "bucket": "${config.bucket}",
