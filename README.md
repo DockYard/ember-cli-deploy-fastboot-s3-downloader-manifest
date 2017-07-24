@@ -1,5 +1,7 @@
 # ember-cli-deploy-fastboot-s3-downloader-manifest
 
+**[ember-cli-deploy-fastboot-s3-downloader-manifest is built and maintained by DockYard, contact us for expert Ember.js consulting](https://dockyard.com/ember-consulting)**.
+
 This README outlines the details of collaborating on this Ember addon.
 
 ## Installation
